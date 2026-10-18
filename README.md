@@ -94,6 +94,58 @@ If you see a setup page, scroll down and click **Create / Reset Database**, then
 | 13 | Reloads Apache2 |
 | 14 | Creates / resets the DVWA database through the setup page |
 
+
+## 🔄 Re-run DVWA After Shutdown / Restart
+ 
+DVWA stays installed on your disk. After you shut down or restart your PC, you only need to start the services again. **You do not need to run the installer again.**
+ 
+### 1. Start the database and web server
+ 
+```bash
+sudo service mariadb start
+sudo service apache2 start
+```
+ 
+### 2. Open DVWA in your browser
+ 
+```
+http://127.0.0.1/DVWA
+```
+ 
+Log in with `admin` / `password`.
+ 
+### 3. Set the security level (if needed)
+ 
+After logging in, go to **DVWA Security** in the left menu and choose a level (Low, Medium, High or Impossible). The level may reset after a restart.
+ 
+### Start services automatically at boot (optional)
+ 
+Run this once, and DVWA will be available whenever Kali starts:
+ 
+```bash
+sudo systemctl enable mariadb apache2
+```
+ 
+To turn auto-start off again:
+ 
+```bash
+sudo systemctl disable mariadb apache2
+```
+ 
+### Stop DVWA when you are done
+ 
+```bash
+sudo service apache2 stop
+sudo service mariadb stop
+```
+ 
+### Quick check that everything is running
+ 
+```bash
+sudo service mariadb status
+sudo service apache2 status
+```
+ 
 ---
 
 ## 🧰 Manual Installation (Optional)
